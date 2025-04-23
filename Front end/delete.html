@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Student Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="insert.html">Insert Student</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="show.html">View Student</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="delete.html">Delete Student</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="update.html">Update Student</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <div class="container-fluid delete-section">
+      <div class="row card py-3">
+          <div class="row">
+              <div class="col">
+                <h2 class="text-center" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Delete Student</h2>
+              </div>
+
+          </div>
+          <div class="row py-2 ">
+              <div class="col d-flex">
+                  <select class="btn btn-light my-2 mx-2" name="deleteOption" id="deleteOption">
+                      <option value="StudentID">StudentID</option>
+                  </select>
+
+                  <input type="text" id="deleteBar" class="form-control my-2" placeholder="StudentID">
+
+                  <button type="button" class="btn btn-dark my-2 mx-2" value="" id="deleteBtn">
+                      <i class="bi bi-trash-fill"></i> </button>
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+  </head>
+
+  
+  <script>
+    //delete student details
+        $(document).ready(function () {
+            $("#deleteBtn").click(function () {
+                var selectedOption = $('#deleteOption').find(":selected").val();
+
+                if (selectedOption == "StudentID") {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: 'http://localhost:3000/api/student/' + $('#deleteBar').val(),
+                        success: function (result) {
+                            alert("student record deleted!");
+                        },
+                        error: function (result) {
+                            alert("can't delete");
+                        }
+                    });
+                }
+
+            });
+        });
+  </script>
+</body>
